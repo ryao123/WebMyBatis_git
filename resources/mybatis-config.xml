@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 核心配置文件 -->
+<configuration>
+  <properties resource="datasources.properties">
+  		
+  </properties>
+
+  <settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings> 
+	<!--为实体类取名
+		type：全路径名称
+	  -->
+	<typeAliases>
+		<package name="entity"/>
+	</typeAliases>
+	
+	
+	<!-- 配置环境变量 -->
+	<environments default="development">
+		<!-- 配置一个具体环境变量 -->
+		<environment id="development">
+			<!--配置事务管理器  -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 配置数据源 
+				mybatis自带数据源POOLED
+				基于tomcat的数据源JNDI
+			-->
+			<dataSource type="POOLED">
+			
+				<property name="driver" value="${data.driver}"/>
+				<property name="url" value="${data.url}"/>
+				<property name="username" value="${data.username}"/>
+				<property name="password" value="${data.password}"/>
+				
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 配置实体类和数据库表的SQL映射文件 -->
+	<mappers>
+		<!-- resource给我们书写的映射文件的全路径 -->
+		<mapper resource="dao/FlowerMapper.xml"/>
+	</mappers>
+	
+	
+</configuration>
